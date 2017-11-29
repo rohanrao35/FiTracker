@@ -22,9 +22,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/signup', function(req,res){
+app.get('/login', function(req,res){
+  console.log('printing your stuff\n')
   console.log(req.body);
-})
+  res.render("userInfo");
+});
+
+app.get('/signUp', function(req,res){
+  res.render("signUp", {
+    title: "Create an Account"
+  });
+});
+
+
 
 app.use('/', index);
 app.use('/users', users);
