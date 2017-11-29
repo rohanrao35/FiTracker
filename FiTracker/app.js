@@ -40,10 +40,14 @@ app.post('/createAccount', function(req,res){
 
 
 app.get('/newWorkout', function(req,res){
-  res.render("signUp");
+  res.render("addWorkout");
 });
 
-
+app.post('/addWorkout', function(req,res){
+  console.log('Workout Added\n')
+  console.log(req.body);
+  res.render("userInfo");
+});
 
 
 app.use('/', index);
