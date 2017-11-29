@@ -22,17 +22,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/login', function(req,res){
-  console.log('printing your stuff\n')
+app.post('/login', function(req,res){
+  console.log('Logged In\n')
   console.log(req.body);
   res.render("userInfo");
 });
 
-app.get('/signUp', function(req,res){
-  res.render("signUp", {
-    title: "Create an Account"
-  });
+app.get('/moveToCreate', function(req,res){
+  res.render("signUp");
 });
+
+app.post('/createAccount', function(req,res){
+  console.log('Created Account\n')
+  console.log(req.body);
+  res.render("index");
+});
+
+
+app.get('/newWorkout', function(req,res){
+  res.render("signUp");
+});
+
 
 
 

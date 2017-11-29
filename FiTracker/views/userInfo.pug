@@ -3,3 +3,8 @@ extends layout
 block content
   p Welcome User
   p This is where your FiTracker information will be shown
+
+  h3 Add A New Workout
+      form(method='get' action='/newWorkout')  
+        p
+        button.btn.btn-primary(type='submit') Add Workout

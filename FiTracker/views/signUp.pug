@@ -4,26 +4,51 @@ block content
 
 
   center
-    h2 Welcome to #{title}
+    h2 Create Your FiTracker Account
+    p
       .main.container
         .row
           .col-md-6.col-md-offset-3
-            p.display-4.m-b-2 Log In
-                // register form
-                form(method='POST' action='/register')
+            form(method='post' action='/createAccount')
+              div.form-group
+                label(for='firstName') First Name
+                p
+                input.form-control(type='text' id='firstName' placeholder='First Name' name='firstName')
+                p
+              div.form-group
+                label(for='lastName') Last Name
+                p
+                input.form-control(type='text' id='lastName' placeholder='Last Name' name='lastName')
+                p
                 div.form-group
-                    label(for='name') Name:
-                    input#name.form-control(type='text', placeholder='first and last' name='name')
+                label(for='userName') User Name
+                p
+                input.form-control(type='text' id='userName' placeholder= 'User Name' name='userName')
+                p
+              div.form-group
+                label(for='gender') Gender
+                p
+                | Male                        
+                input.form-control(type='radio' id='gender' name='gender', value = 0)
+                p
+                | Female
+                input.form-control(type='radio' id='gender' name='gender', value = 1)
+          
+                p
                 div.form-group
-                    label(for='email') Email:
-                    input#email.form-control(type='email', placeholder='name@email.com' name='email')
-                div.form-group
-                    label(for='favoriteBook') Favorite Book:
-                    input#favoriteBook.form-control(type='text', placeholder='title of book' name='favoriteBook')
-                div.form-group
-                    label(for='pw') Password:
-                    input#pw.form-control(type='password' name='password')
-                div.form-group
-                    label(for='pw2') Confirm Password:
-                    input#pw2.form-control(type='password' name='confirmPassword')
-                button.btn.btn-primary(type='submit') Sign up
+                label(for='age') Age
+                p
+                input.form-control(type='Number' id='age' placeholder='age' name='age')
+                p
+              div.form-group
+                label(for='password') Password
+                p
+                input.form-control(type='password' id='password' placeholder='password' name='password')
+                p
+
+              div.form-group
+                label(for='ReEnterPassword') Password
+                p
+                input.form-control(type='ReEnterPassword' id='ReEnterPassword' placeholder='Re-Enter Password' name='ReEnterPassword')
+                p
+              button.btn.btn-primary(type='submit') Create Account
