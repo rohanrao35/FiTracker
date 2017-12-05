@@ -4,11 +4,23 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+const mongoose = require('mongoose');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+User =require('./models/user');
+
+mongoose.connect('mongodb://rohanrao35:fitracker1@ds129946.mlab.com:29946/fitracker');
+
+
+
+
+
+var db = mongoose.connection;
+app.listen(3000, 'localhost');
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,6 +34,44 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+
+
+app.get('/api/users', function(req, res){
+
+  User.getUsers(function(err, users){
+      if(err){
+        throw err;
+      }
+      res.json(users);
+  });
+
+});
+// app.post('/api/genres', (req, res) => {
+// 	var genre = req.body;
+// 	Genre.addGenre(genre, (err, genre) => {
+// 		if(err){
+// 			throw err;
+// 		}
+// 		res.json(genre);
+// 	});
+// });
+app.post('/api/users', (req, res) => {
+	var user = req.body;
+  console.log('ERROR MAY HAPPEN');
+	User.addUser(user, (err, user) => {
+
+
+		if(err){
+			throw err;
+		}
+
+		res.json(user);
+	});
+});
+
+
 app.post('/login', function(req,res){
   console.log('Logged In\n')
   console.log(req.body);
@@ -29,13 +79,25 @@ app.post('/login', function(req,res){
 });
 
 app.get('/moveToCreate', function(req,res){
+  //console.log(req.body);
   res.render("signUp");
 });
 
 app.post('/createAccount', function(req,res){
+
+    var user = req.body;
+	  User.addUser(user, (err, user) => {
+		    if(err){
+			       throw err;
+		    }
+		    //res.json(user);
+    });
+    res.render("index");
   console.log('Created Account\n')
   console.log(req.body);
-  res.render("index");
+  //res.render("index");
+
+
 });
 
 
