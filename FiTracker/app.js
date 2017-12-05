@@ -75,12 +75,33 @@ app.post('/api/users', (req, res) => {
 app.post('/login', function(req,res){
   console.log('Logged In\n')
   console.log(req.body);
-  res.render("userInfo");
+  res.render("userInfo", {user: req.body.username});
 });
 
 app.get('/moveToCreate', function(req,res){
   //console.log(req.body);
   res.render("signUp");
+});
+
+app.get('/getWorkouts7', function(req,res){
+  //console.log(req.body);
+  res.render("userWorkouts7");
+});
+
+app.get('/getWorkouts30', function(req,res){
+  //console.log(req.body);
+  res.render("userWorkouts30");
+});
+
+
+app.get('/getWorkouts365', function(req,res){
+  //console.log(req.body);
+  res.render("userWorkouts365");
+});
+
+app.get('/getWorkoutsAll', function(req,res){
+  //console.log(req.body);
+  res.render("userWorkoutsAll");
 });
 
 app.post('/createAccount', function(req,res){
@@ -92,6 +113,8 @@ app.post('/createAccount', function(req,res){
 		    }
 		    //res.json(user);
     });
+
+    console.log(req.body.username);
     res.render("index");
   console.log('Created Account\n')
   console.log(req.body);
