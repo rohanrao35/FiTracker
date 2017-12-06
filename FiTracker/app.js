@@ -84,6 +84,28 @@ app.post('/login', function(req, res){
 });
 
 
+app.get('/getWorkouts7', function(req,res){
+  //console.log(req.body);
+  res.render("userWorkouts7");
+});
+
+app.get('/getWorkouts30', function(req,res){
+  //console.log(req.body);
+  res.render("userWorkouts30");
+});
+
+
+app.get('/getWorkouts365', function(req,res){
+  //console.log(req.body);
+  res.render("userWorkouts365");
+});
+
+app.get('/getWorkoutsAll', function(req,res){
+  //console.log(req.body);
+  res.render("userWorkoutsAll");
+});
+
+
 
 
 app.post('/createAccount', function(req,res){
