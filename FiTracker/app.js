@@ -56,7 +56,7 @@ app.post('/login', function(req, res){
   var collection = db.collection('users');
   var user;
 
-  collection.find({username: req.body.userName}).toArray(function (err, items) {
+  collection.find({username: req.body.username}).toArray(function (err, items) { ////////////////
     user = items[0];
     if(user == null){
       console.log('USER DOES NOT EXIST');
@@ -72,9 +72,9 @@ app.post('/login', function(req, res){
     }
     else{
       console.log('LOGGED IN');
-      collection.updateOne({username: req.body.userName}, {$set:{loggedIn: 1}});
+      collection.updateOne({username: req.body.username}, {$set:{loggedIn: 1}});////////////
       //res.render("userInfo", {user: req.body.userName});
-      currentUser = req.body.userName;
+      currentUser = req.body.username;////////////////
       res.render("userInfo");
 
       console.log('Current User: '+ currentUser)
