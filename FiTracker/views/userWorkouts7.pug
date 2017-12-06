@@ -1,8 +1,57 @@
-extends layout
+extends layoutWorkout
 
+block vars
+    - var milesRun = [7, 5, 4, 6, 5, 11, 10];
+    - var heartRate = [95, 90, 100, 110, 85, 90, 100];
+    - var weightAtStart = [190, 180, 185, 180, 182, 181, 184];
+    - var duration = "120";
+    - var caloriesBurned ="300";
+    - var totalMiles = 0;
+    - var avgMiles = 0;
+    - var numDays = 7;
 block content
-    p Welcome User
-    p This is where your FiTracker information will be shown once we have completed the app
+    center
+        h1 Your Total Statistics for the Past 7 Workouts
+
+        each val in milesRun
+            script.
+                #{totalMiles= totalMiles + val}
+                
+        h3 Miles Run #{totalMiles}
+
+        script.
+            #{avgMiles= totalMiles}
+            #{avgMiles = totalMiles / numDays}
+        
+        h3 Your average per workout was #{avgMiles}
+        canvas(id="chartPic" width="1000" height="1000")
+        script.
+            - window.onload() {
+                var ctx = document.getElementById("chartPic").getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ["red", "green", "blue"],
+                        datasets: [{
+                            label: 'Number of votes',
+                            data: [1, 1, 1],
+                            backgroundColor: ['red', 'green', 'blue'],
+                            borderColor: ['green', 'blue', 'red'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: "chart"
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                
+            };
+
+
 
 
 
