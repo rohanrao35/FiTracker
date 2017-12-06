@@ -62,3 +62,20 @@ module.exports.removeUser = (un, callback) => {
 	var query = {username: un};
 	User.remove(query, callback);
 }
+
+module.exports.login = (un, user, options, callback) => {
+	var query = {username: un};
+	var update = {
+		loggedIn: 1
+	}
+	User.findOneAndUpdate(query, update, options, callback);
+}
+
+
+// module.exports.updateGenre = (id, genre, options, callback) => {
+// 	var query = {_id: id};
+// 	var update = {
+// 		name: genre.name
+// 	}
+// 	Genre.findOneAndUpdate(query, update, options, callback);
+// }
