@@ -76,7 +76,7 @@ app.post('/login', function(req, res){
       collection.updateOne({username: req.body.username}, {$set:{loggedIn: 1}});////////////
       //res.render("userInfo", {user: req.body.userName});
       currentUser = req.body.username;////////////////
-      res.render("userInfo");
+      res.render("userInfo",{user: 'Rohan'});
 
       console.log('Current User: '+ currentUser)
     }
@@ -85,27 +85,112 @@ app.post('/login', function(req, res){
 
 
 app.get('/getWorkouts7', function(req,res){
-  //console.log(req.body);
-  res.render("userWorkouts7");
+  var collection = db.collection('workouts');
+
+  collection.find({username: currentUser}).limit(7).sort( { date: -1 } ).toArray(function (err, items) {
+
+    var milesRun = new Array(items.length);
+    var heartRate = new Array(items.length);
+    var caloriesBurned = new Array(items.length);
+    var duration = new Array(items.length);
+
+    for (var i = 0; i < items.length; i++) {
+      milesRun[i] = items[i].milesRun;
+      heartRate[i] = items[i].heartRate;
+      caloriesBurned[i] = items[i].caloriesBurned;
+      duration[i] = items[i].duration;
+    }
+
+    console.log('Miles Run: ' + milesRun);
+    console.log('Heart Rate: ' + heartRate);
+    console.log('Calories Burned: ' + caloriesBurned);
+    console.log('Duration: ' + duration);
+  });
+
+
+
+  res.render("userWorkouts7", {miles: milesRun, heart: heartRate, calories: caloriesBurned, time: duration});
 });
 
 app.get('/getWorkouts30', function(req,res){
-  //console.log(req.body);
+
+  var collection = db.collection('workouts');
+
+  collection.find({username: currentUser}).limit(30).sort( { date: -1 } ).toArray(function (err, items) {
+
+    var milesRun = new Array(items.length);
+    var heartRate = new Array(items.length);
+    var caloriesBurned = new Array(items.length);
+    var duration = new Array(items.length);
+
+    for (var i = 0; i < items.length; i++) {
+      milesRun[i] = items[i].milesRun;
+      heartRate[i] = items[i].heartRate;
+      caloriesBurned[i] = items[i].caloriesBurned;
+      duration[i] = items[i].duration;
+    }
+
+    console.log('Miles Run: ' + milesRun);
+    console.log('Heart Rate: ' + heartRate);
+    console.log('Calories Burned: ' + caloriesBurned);
+    console.log('Duration: ' + duration);
+  });
+
   res.render("userWorkouts30");
 });
 
 
 app.get('/getWorkouts365', function(req,res){
-  //console.log(req.body);
+  var collection = db.collection('workouts');
+
+  collection.find({username: currentUser}).limit(365).sort( { date: -1 } ).toArray(function (err, items) {
+
+    var milesRun = new Array(items.length);
+    var heartRate = new Array(items.length);
+    var caloriesBurned = new Array(items.length);
+    var duration = new Array(items.length);
+
+    for (var i = 0; i < items.length; i++) {
+      milesRun[i] = items[i].milesRun;
+      heartRate[i] = items[i].heartRate;
+      caloriesBurned[i] = items[i].caloriesBurned;
+      duration[i] = items[i].duration;
+    }
+
+    console.log('Miles Run: ' + milesRun);
+    console.log('Heart Rate: ' + heartRate);
+    console.log('Calories Burned: ' + caloriesBurned);
+    console.log('Duration: ' + duration);
+  });
+
   res.render("userWorkouts365");
 });
 
 app.get('/getWorkoutsAll', function(req,res){
-  //console.log(req.body);
+  var collection = db.collection('workouts');
+
+  collection.find({username: currentUser}).sort( { date: -1 } ).toArray(function (err, items) {
+
+    var milesRun = new Array(items.length);
+    var heartRate = new Array(items.length);
+    var caloriesBurned = new Array(items.length);
+    var duration = new Array(items.length);
+
+    for (var i = 0; i < items.length; i++) {
+      milesRun[i] = items[i].milesRun;
+      heartRate[i] = items[i].heartRate;
+      caloriesBurned[i] = items[i].caloriesBurned;
+      duration[i] = items[i].duration;
+    }
+
+    console.log('Miles Run: ' + milesRun);
+    console.log('Heart Rate: ' + heartRate);
+    console.log('Calories Burned: ' + caloriesBurned);
+    console.log('Duration: ' + duration);
+  });
+
   res.render("userWorkoutsAll");
 });
-
-
 
 
 app.post('/createAccount', function(req,res){
