@@ -20,7 +20,8 @@ mongoose.connect('mongodb://rohanrao35:fitracker1@ds129946.mlab.com:29946/fitrac
 
 
 var db = mongoose.connection;
-app.listen(3000, 'localhost');
+// app.listen(3000, 'localhost');
+app.listen(process.env.PORT || 5000)
 
 
 
