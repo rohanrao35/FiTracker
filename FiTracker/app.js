@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 var index = require('./routes/index');
+var session = require("express-session")
 //var users = require('./routes/users');
 
 var app = express();
@@ -33,9 +34,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({resave: true, saveUninitialized: true, secret: 'SOMERANDOMSECRETHERE', cookie: { maxAge: 60000 }}));
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.use(express.static(path.join(__dirname, '/public/js')));
 
 
 
@@ -74,9 +75,11 @@ app.post('/login', function(req, res){
     else{
       console.log('LOGGED IN');
       collection.updateOne({username: req.body.username}, {$set:{loggedIn: 1}});////////////
-      //res.render("userInfo", {user: req.body.userName});
+      req.session.userID = req.body.username;
+      console.log(req.session);
+      res.render("userInfo", {user: req.body.username});
       currentUser = req.body.username;////////////////
-      res.render("userInfo");
+      //res.render("userInfo");
 
       console.log('Current User: '+ currentUser)
     }
@@ -86,6 +89,7 @@ app.post('/login', function(req, res){
 
 app.get('/getWorkouts7', function(req,res){
   //console.log(req.body);
+  console.log(req.session.userID)
   res.render("userWorkouts7");
 });
 
@@ -119,8 +123,7 @@ app.post('/createAccount', function(req,res){
     res.render("index");
   console.log('Created Account\n')
   console.log(req.body);
-});
-/////
+})
 
 
 app.get('/moveToCreate', function(req,res){

@@ -4,6 +4,7 @@ var path = require('path');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
+  console.log(req.session);
   res.send('respond with a resource');
 });
 
