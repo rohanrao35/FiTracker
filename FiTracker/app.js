@@ -110,10 +110,10 @@ app.get('/getWorkouts7', function(req,res){
     heartRate.reverse();
     caloriesBurned.reverse();
     duration.reverse();
-    console.log('Miles Run: ' + milesRun);
-    console.log('Heart Rate: ' + heartRate);
-    console.log('Calories Burned: ' + caloriesBurned);
-    console.log('Duration: ' + duration);
+    // console.log('Miles Run: ' + milesRun);
+    // console.log('Heart Rate: ' + heartRate);
+    // console.log('Calories Burned: ' + caloriesBurned);
+    // console.log('Duration: ' + duration);
 
     res.render("userWorkouts7", {miles: milesRun, heart: heartRate, calories: caloriesBurned, time: duration, num: items.length });
   });
@@ -143,10 +143,10 @@ app.get('/getWorkouts30', function(req,res){
     caloriesBurned.reverse();
     duration.reverse();
 
-    console.log('Miles Run: ' + milesRun);
-    console.log('Heart Rate: ' + heartRate);
-    console.log('Calories Burned: ' + caloriesBurned);
-    console.log('Duration: ' + duration);
+    // console.log('Miles Run: ' + milesRun);
+    // console.log('Heart Rate: ' + heartRate);
+    // console.log('Calories Burned: ' + caloriesBurned);
+    // console.log('Duration: ' + duration);
     res.render("userWorkouts30", {miles: milesRun, heart: heartRate, calories: caloriesBurned, time: duration, num: items.length});
   });
 
@@ -176,10 +176,10 @@ app.get('/getWorkouts365', function(req,res){
     caloriesBurned.reverse();
     duration.reverse();
 
-    console.log('Miles Run: ' + milesRun);
-    console.log('Heart Rate: ' + heartRate);
-    console.log('Calories Burned: ' + caloriesBurned);
-    console.log('Duration: ' + duration);
+    // console.log('Miles Run: ' + milesRun);
+    // console.log('Heart Rate: ' + heartRate);
+    // console.log('Calories Burned: ' + caloriesBurned);
+    // console.log('Duration: ' + duration);
 
     res.render("userWorkouts365", {miles: milesRun, heart: heartRate, calories: caloriesBurned, time: duration, num: items.length});
   });
@@ -208,10 +208,10 @@ app.get('/getWorkoutsAll', function(req,res){
     caloriesBurned.reverse();
     duration.reverse();
 
-    console.log('Miles Run: ' + milesRun);
-    console.log('Heart Rate: ' + heartRate);
-    console.log('Calories Burned: ' + caloriesBurned);
-    console.log('Duration: ' + duration);
+    // console.log('Miles Run: ' + milesRun);
+    // console.log('Heart Rate: ' + heartRate);
+    // console.log('Calories Burned: ' + caloriesBurned);
+    // console.log('Duration: ' + duration);
     res.render("userWorkoutsAll", {miles: milesRun, heart: heartRate, calories: caloriesBurned, time: duration, num: items.length});
   });
 });
