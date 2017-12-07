@@ -16,7 +16,7 @@ Workout =require('./models/workout')
 mongoose.connect('mongodb://rohanrao35:fitracker1@ds129946.mlab.com:29946/fitracker', { useMongoClient: true });
 
 
-var currentUser;
+// var currentUser;
 
 
 var db = mongoose.connection;
@@ -88,28 +88,133 @@ app.post('/login', function(req, res){
 
 
 app.get('/getWorkouts7', function(req,res){
-  //console.log(req.body);
-  console.log(req.session.userID)
-  res.render("userWorkouts7");
+
+  console.log(req.session.userID);
+  var currentUser = req.session.userID;
+  var collection = db.collection('workouts');
+
+  collection.find({username: currentUser}).limit(7).sort( { date: -1 } ).toArray(function (err, items) {
+
+    var milesRun = new Array(items.length);
+    var heartRate = new Array(items.length);
+    var caloriesBurned = new Array(items.length);
+    var duration = new Array(items.length);
+
+    for (var i = 0; i < items.length; i++) {
+      milesRun[i] = items[i].milesRun;
+      heartRate[i] = items[i].heartRate;
+      caloriesBurned[i] = items[i].caloriesBurned;
+      duration[i] = items[i].duration;
+    }
+    milesRun.reverse();
+    heartRate.reverse();
+    caloriesBurned.reverse();
+    duration.reverse();
+    console.log('Miles Run: ' + milesRun);
+    console.log('Heart Rate: ' + heartRate);
+    console.log('Calories Burned: ' + caloriesBurned);
+    console.log('Duration: ' + duration);
+
+    res.render("userWorkouts7", {miles: milesRun, heart: heartRate, calories: caloriesBurned, time: duration, num: items.length });
+  });
 });
 
 app.get('/getWorkouts30', function(req,res){
-  //console.log(req.body);
-  res.render("userWorkouts30");
+  var currentUser = req.session.userID;
+
+  var collection = db.collection('workouts');
+
+  collection.find({username: currentUser}).limit(30).sort( { date: -1 } ).toArray(function (err, items) {
+
+    var milesRun = new Array(items.length);
+    var heartRate = new Array(items.length);
+    var caloriesBurned = new Array(items.length);
+    var duration = new Array(items.length);
+
+    for (var i = 0; i < items.length; i++) {
+      milesRun[i] = items[i].milesRun;
+      heartRate[i] = items[i].heartRate;
+      caloriesBurned[i] = items[i].caloriesBurned;
+      duration[i] = items[i].duration;
+    }
+
+    milesRun.reverse();
+    heartRate.reverse();
+    caloriesBurned.reverse();
+    duration.reverse();
+
+    console.log('Miles Run: ' + milesRun);
+    console.log('Heart Rate: ' + heartRate);
+    console.log('Calories Burned: ' + caloriesBurned);
+    console.log('Duration: ' + duration);
+    res.render("userWorkouts30", {miles: milesRun, heart: heartRate, calories: caloriesBurned, time: duration, num: items.length});
+  });
+
 });
 
 
 app.get('/getWorkouts365', function(req,res){
-  //console.log(req.body);
-  res.render("userWorkouts365");
+  var currentUser = req.session.userID;
+  var collection = db.collection('workouts');
+
+  collection.find({username: currentUser}).limit(365).sort( { date: -1 } ).toArray(function (err, items) {
+
+    var milesRun = new Array(items.length);
+    var heartRate = new Array(items.length);
+    var caloriesBurned = new Array(items.length);
+    var duration = new Array(items.length);
+
+    for (var i = 0; i < items.length; i++) {
+      milesRun[i] = items[i].milesRun;
+      heartRate[i] = items[i].heartRate;
+      caloriesBurned[i] = items[i].caloriesBurned;
+      duration[i] = items[i].duration;
+    }
+
+    milesRun.reverse();
+    heartRate.reverse();
+    caloriesBurned.reverse();
+    duration.reverse();
+
+    console.log('Miles Run: ' + milesRun);
+    console.log('Heart Rate: ' + heartRate);
+    console.log('Calories Burned: ' + caloriesBurned);
+    console.log('Duration: ' + duration);
+
+    res.render("userWorkouts365", {miles: milesRun, heart: heartRate, calories: caloriesBurned, time: duration, num: items.length});
+  });
 });
 
 app.get('/getWorkoutsAll', function(req,res){
-  //console.log(req.body);
-  res.render("userWorkoutsAll");
+  var currentUser = req.session.userID;
+  var collection = db.collection('workouts');
+
+  collection.find({username: currentUser}).sort( { date: -1 } ).toArray(function (err, items) {
+
+    var milesRun = new Array(items.length);
+    var heartRate = new Array(items.length);
+    var caloriesBurned = new Array(items.length);
+    var duration = new Array(items.length);
+
+    for (var i = 0; i < items.length; i++) {
+      milesRun[i] = items[i].milesRun;
+      heartRate[i] = items[i].heartRate;
+      caloriesBurned[i] = items[i].caloriesBurned;
+      duration[i] = items[i].duration;
+    }
+
+    milesRun.reverse();
+    heartRate.reverse();
+    caloriesBurned.reverse();
+    duration.reverse();
+
+    console.log('Miles Run: ' + milesRun);
+    console.log('Heart Rate: ' + heartRate);
+    console.log('Calories Burned: ' + caloriesBurned);
+    console.log('Duration: ' + duration);
+    res.render("userWorkoutsAll", {miles: milesRun, heart: heartRate, calories: caloriesBurned, time: duration, num: items.length});
+  });
 });
-
-
 
 
 app.post('/createAccount', function(req,res){
