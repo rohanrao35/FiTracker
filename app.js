@@ -1,4 +1,5 @@
-var express = require('express');
+var express = require('express'); 
+var session = require("session-mongoose");
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -6,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 var index = require('./routes/index');
-var session = require("express-session")
+var SessionStore = require("session-mongoose");
 //var users = require('./routes/users');
 
 var app = express();
@@ -35,7 +36,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({resave: true, saveUninitialized: true, secret: 'SOMERANDOMSECRETHERE', cookie: { maxAge: 60000 }}));
+app.use(
+  express.session({
+    store: new SessionStore({
+      url: 'mongodb://rohanrao35:fitracker1@ds129946.mlab.com:29946/fitracker',
+      interval: 1200000
+    }),
+    resave: true,
+    saveUninitialized: true, 
+    secret: 'SOMERANDOMSECRETHERE', 
+    cookie: { maxAge: 60000 }}));
 app.use(express.static(path.join(__dirname, '/public')));
 
 
