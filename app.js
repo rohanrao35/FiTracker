@@ -235,28 +235,33 @@ app.get('/getWorkoutsAll/:username', function(req,res){
 });
 
 
-app.post('/createAccount', function(req,res){
-    var user = req.body;
-    user.loggedIn = 0;
-    if(req.body.password != req.body.CPassword){
-      res.render("signUp");
-    }
-    else if (req.body.password.length < 8) {
-      res.render("signUp");
-    }
-	  User.addUser(user, (err, user) => {
-		    if(err){
-			       throw err;
-		    }
-    });
-    res.render("index");
-  console.log('Created Account\n')
-  console.log(req.body);
-})
+app.post('/createAccount', function(req, res){
+  var user = req.body;
+  console.log(user);
+  user.loggedIn = 0;
 
+  if(req.body.password != req.body.Cpassword){
+    console.log("pass doesnt match");
+    res.render("signUp");
+  }
+  else if (req.body.password.length < 8) {
+    console.log("pass isnt long enough");
+    res.render("signUp");
+  }
+  else {
+    User.addUser(user, (err, user) => {
+        if(err){
+            throw err;
+        }
+        res.render("index");
+    });
+
+  }
+  res.render("index");
+});
 
 app.get('/moveToCreate', function(req,res){
-  console.log(req.body);
+  // console.log(req.body);
   res.render("signUp");
 });
 
@@ -296,7 +301,9 @@ app.post('/addWorkout/:username', function(req,res){
       //(WOMEN) Calories Burned = [(Age x 0.074) — (Weight x 0.05741) + (Heart Rate x 0.4472) — 20.4022] x Time / 4.184.
 
 
-
+      if (workout.caloriesBurned < 0) {
+          workout.caloriesBurned = 0;
+      }
 
       console.log(workout);
 
@@ -314,18 +321,7 @@ app.post('/addWorkout/:username', function(req,res){
 });
 
 
-app.post('/createAccount', function(req,res){
-    var user = req.body;
-    user.loggedIn = 0;
-	  User.addUser(user, (err, user) => {
-		    if(err){
-			       throw err;
-		    }
-    });
-    res.render("index");
-  console.log('Created Account\n')
-  console.log(req.body);
-});
+
 
 
 
