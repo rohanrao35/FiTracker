@@ -9,22 +9,22 @@ block content
         p
         button.btn.btn-primary(type='submit') Add Workout
 
-  h3 View My Workouts From Past 7 Days
-      form(method='get' action='/getWorkouts7')  
+  h3 View My Workouts From Past 7 Days for !{user}
+      form(method='get' action='/getWorkouts7/'+ user)  
         p
         button.btn.btn-primary(type='submit') View Workouts
 
   h3 View My Workouts From Past 30 Days
-      form(method='get' action='/getWorkouts30')  
+      form(method='get' action='/getWorkouts30/'+ user)  
         p
         button.btn.btn-primary(type='submit') View Workouts
 
   h3 View My Workouts From Past 365 Days
-      form(method='get' action='/getWorkouts365')  
+      form(method='get' action='/getWorkouts365/'+ user)  
         p
         button.btn.btn-primary(type='submit') View Workouts
 
   h3 View All of My Workouts
-      form(method='get' action='/getWorkoutsAll')  
+      form(method='get' action='/getWorkoutsAll/'+ user)  
         p
         button.btn.btn-primary(type='submit') View Workouts

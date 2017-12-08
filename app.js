@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 var index = require('./routes/index');
-var session = require("express-session")
+var session = require("express-session");
 //var users = require('./routes/users');
 
 var app = express();
@@ -54,7 +54,8 @@ app.get('/api/users', function(req, res){
 
 
 
-app.post('/login', function(req, res){
+app.post('/login/', function(req, res){
+  console.log(req.params.username);
 
   var collection = db.collection('users');
   var user;
@@ -88,10 +89,11 @@ app.post('/login', function(req, res){
 });
 
 
-app.get('/getWorkouts7', function(req,res){
+app.get('/getWorkouts7/:username', function(req,res){
 
   console.log(req.session.userID);
-  var currentUser = req.session.userID;
+  //var currentUser = req.session.userID;
+  var currentUser = req.params.username;
   var collection = db.collection('workouts');
 
   collection.find({username: currentUser}).limit(7).sort( { date: -1 } ).toArray(function (err, items) {
@@ -120,8 +122,9 @@ app.get('/getWorkouts7', function(req,res){
   });
 });
 
-app.get('/getWorkouts30', function(req,res){
-  var currentUser = req.session.userID;
+app.get('/getWorkouts30/:username', function(req,res){
+  //var currentUser = req.session.userID;
+  var currentUser = req.params.username;
 
   var collection = db.collection('workouts');
 
@@ -154,8 +157,9 @@ app.get('/getWorkouts30', function(req,res){
 });
 
 
-app.get('/getWorkouts365', function(req,res){
-  var currentUser = req.session.userID;
+app.get('/getWorkouts365/:username', function(req,res){
+ // var currentUser = req.session.userID;
+ var currentUser = req.params.username;
   var collection = db.collection('workouts');
 
   collection.find({username: currentUser}).limit(365).sort( { date: -1 } ).toArray(function (err, items) {
@@ -186,8 +190,9 @@ app.get('/getWorkouts365', function(req,res){
   });
 });
 
-app.get('/getWorkoutsAll', function(req,res){
-  var currentUser = req.session.userID;
+app.get('/getWorkoutsAll/:username', function(req,res){
+ // var currentUser = req.session.userID;
+ var currentUser = req.params.username;
   var collection = db.collection('workouts');
 
   collection.find({username: currentUser}).sort( { date: -1 } ).toArray(function (err, items) {
