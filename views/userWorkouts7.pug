@@ -1,0 +1,195 @@
+extends layout
+
+block vars
+    - var milesRun = miles
+    - var heartRate = heart
+    - var duration = time
+    - var caloriesBurned = calories
+    - var totalMiles = 0;
+    - var avgMiles = 0;
+    - var totalHeartRate = 0;
+    - var avgHeartRate = 0;
+    - var totalDuration = 0;
+    - var avgDuration = 0;
+    - var totalCalsBurned = 0;
+    - var avgCalsBurned = 0;
+    - var numDays = num
+
+block scripts
+    script(src="https://cdn.plot.ly/plotly-latest.min.js")
+block content
+    center
+        h1 Your Total Statistics for the Past 7 Workouts
+
+
+
+        each val in milesRun
+            script.
+                #{totalMiles= totalMiles + val}
+                
+        h3 Miles Run #{totalMiles}
+
+        script.
+            #{avgMiles= totalMiles}
+            #{avgMiles = totalMiles / numDays}
+            #{avgMiles = Math.round(avgMiles)}
+            
+        
+        h3 Your average per workout was #{avgMiles}
+
+        
+        div(id="milesRun")
+        script.
+            var trace1 = {
+                x: [1, 2, 3 , 4, 5, 6 , 7,],
+                y: [#{milesRun}],
+                mode: 'line'
+            };
+
+            var data = [trace1];
+
+            var layout = {
+                title:'Miles Run the Past 7 Workouts',
+                xaxis: {
+                    title: 'Day',
+                    showgrid: true,
+                    zeroline: false,
+                    showline: true
+                },
+                yaxis: {
+                    title: 'Miles Run',
+                    showline: true
+                }
+            };
+
+            Plotly.newPlot('milesRun', data, layout);
+
+        each val in heartRate
+            script.
+                #{totalHeartRate= totalHeartRate + val}
+                
+        script.
+            #{avgHeartRate= totalHeartRate}
+            #{avgHeartRate = totalHeartRate / numDays}
+            #{avgHeartRate = Math.round(avgHeartRate)}
+        
+        h3 Your average heart rate per workout was #{avgHeartRate}
+
+
+        div(id="heartRate")
+        script.
+            var trace2 = {
+                x: [1, 2, 3 , 4, 5, 6 , 7,],
+                y: [#{heartRate}],
+                mode: 'line'
+            };
+
+            var data = [trace2];
+
+            var layout = {
+                title:'Heart Rate Over the Past 7 Workouts',
+                xaxis: {
+                    title: 'Day',
+                    showgrid: true,
+                    zeroline: false,
+                    showline: true
+                },
+                yaxis: {
+                    title: 'Heart Rate in BPM',
+                    showline: true
+                }
+            };
+
+            Plotly.newPlot('heartRate', data, layout);
+
+
+        each val in duration
+            script.
+                #{totalDuration= totalDuration + val}
+                
+        script.
+            #{avgDuration = totalDuration}
+            #{avgDuration = totalDuration / numDays}
+            #{avgDuration = Math.round(avgDuration)}
+        
+        h3 Your average duration per workout was #{avgDuration} minutes
+        h3 You worked out for #{totalDuration} minutes over your last 7 workouts
+
+        div(id="duration")
+        script.
+            var trace3 = {
+                x: [1, 2, 3 , 4, 5, 6 , 7,],
+                y: [#{duration}],
+                mode: 'line'
+            };
+
+            var data = [trace3];
+
+            var layout = {
+                title:'Duration of the Past 7 Workouts',
+                xaxis: {
+                    title: 'Day',
+                    showgrid: true,
+                    zeroline: false,
+                    showline: true,
+                },
+                yaxis: {
+                    title: 'Duration in Minutes',
+                    showline: true
+                }
+            };
+
+            Plotly.newPlot('duration', data, layout);
+
+        each val in caloriesBurned
+            script.
+                #{totalCalsBurned= totalCalsBurned + val}
+                
+        script.
+            #{avgCalsBurned = totalCalsBurned}
+            #{avgCalsBurned = totalCalsBurned / numDays}
+            #{avgCalsBurned = Math.round(avgCalsBurned)}
+        
+        h3 Your average calories burned per workout was #{avgCalsBurned} calories
+        h3 You burned #{totalCalsBurned} calories over your last 7 workouts
+
+
+        div(id="caloriesBurned")
+        script.
+            var trace3 = {
+                x: [1, 2, 3 , 4, 5, 6 , 7,],
+                y: [#{caloriesBurned}],
+                mode: 'line'
+            };
+
+            var data = [trace3];
+
+            var layout = {
+                title:'Calories Burned in the Past 7 Workouts',
+                xaxis: {
+                    title: 'Day',
+                    showgrid: true,
+                    zeroline: false,
+                    showline: true
+                },
+                yaxis: {
+                    title: 'Calories Burned',
+                    showline: true
+                }
+            };
+
+            Plotly.newPlot('caloriesBurned', data, layout);
+
+
+
+
+    
+
+
+
+
+
+    
+
+
+
