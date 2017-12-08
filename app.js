@@ -62,9 +62,10 @@ app.post('/login/', function(req, res){
   var first;
   collection.find({username: req.body.username}).toArray(function (err, items) { ////////////////
     user = items[0];
-    first = items[0].firstName;
+    
     if(user == null){
       console.log('USER DOES NOT EXIST');
+      // alert("No user exists for that username");
       res.render("index");
       return;
     }
@@ -73,6 +74,7 @@ app.post('/login/', function(req, res){
 
     if(user.password != req.body.password){
       console.log('WRONG PASSWORD');
+      // alert("Username or Password is incorrect");
       res.render("index");
     }
     else{
@@ -81,7 +83,7 @@ app.post('/login/', function(req, res){
 
       var currentUser = req.body.username;
       var collectiona = db.collection('workouts');
-      
+      first = items[0].firstName;
       collectiona.find({username: currentUser}).sort( { date: -1 } ).toArray(function (err, items1) {
         res.render("userInfo", {user: req.body.username, f: first, num: items1.length});
         console.log('Current User: '+ currentUser);
