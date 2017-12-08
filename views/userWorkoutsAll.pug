@@ -20,25 +20,25 @@ block scripts
     script(src="https://cdn.plot.ly/plotly-latest.min.js")
 block content
     center
-        h1 Your Total Statistics for !{num} Workouts
+        h1 Total Statistics for !{num} Workouts
 
 
 
         each val in milesRun
             script.
                 #{totalMiles= totalMiles + val}
-                
-        h3 Miles Run #{totalMiles}
+
+        h3 Total Miles Run: #{totalMiles}
 
         script.
             #{avgMiles= totalMiles}
             #{avgMiles = totalMiles / numDays}
             #{avgMiles = Math.round(avgMiles)}
-            
-        
-        h3 Your average per workout was #{avgMiles}
 
-        
+
+        h3 Average Miles Run: #{avgMiles}
+
+
         div(id="milesRun")
         script.
             var trace1 = {
@@ -50,9 +50,9 @@ block content
             var data = [trace1];
 
             var layout = {
-                title:'Miles Run in !{num} Workouts',
+                title:'Miles Run',
                 xaxis: {
-                    title: 'Day',
+                    title: 'Workout',
                     showgrid: true,
                     zeroline: false,
                     showline: true
@@ -68,13 +68,13 @@ block content
         each val in heartRate
             script.
                 #{totalHeartRate= totalHeartRate + val}
-                
+
         script.
             #{avgHeartRate= totalHeartRate}
             #{avgHeartRate = totalHeartRate / numDays}
             #{avgHeartRate = Math.round(avgHeartRate)}
-        
-        h3 Your average heart rate per workout was #{avgHeartRate}
+
+        h3 Average Heart Rate: #{avgHeartRate}
 
 
         div(id="heartRate")
@@ -88,7 +88,7 @@ block content
             var data = [trace2];
 
             var layout = {
-                title:'Heart Rate Over the Past !{num} Workouts',
+                title:'Heart Rate',
                 xaxis: {
                     title: 'Day',
                     showgrid: true,
@@ -96,7 +96,7 @@ block content
                     showline: true
                 },
                 yaxis: {
-                    title: 'Heart Rate in BPM',
+                    title: 'Heart Rate (BPM)',
                     showline: true
                 }
             };
@@ -107,14 +107,15 @@ block content
         each val in duration
             script.
                 #{totalDuration= totalDuration + val}
-                
+
         script.
             #{avgDuration = totalDuration}
             #{avgDuration = totalDuration / numDays}
             #{avgDuration = Math.round(avgDuration)}
-        
-        h3 Your average duration per workout was #{avgDuration} minutes
-        h3 You worked out for #{totalDuration} minutes over your last !{num} workouts
+
+        h3 Total Workout Duration: #{totalDuration} minutes
+        h3 Average Workout Duration: #{avgDuration} minutes
+
 
         div(id="duration")
         script.
@@ -127,15 +128,15 @@ block content
             var data = [trace3];
 
             var layout = {
-                title:'Duration of the Past !{num} Workouts',
+                title:'Duration',
                 xaxis: {
-                    title: 'Day',
+                    title: 'Workout',
                     showgrid: true,
                     zeroline: false,
                     showline: true,
                 },
                 yaxis: {
-                    title: 'Duration in Minutes',
+                    title: 'Duration',
                     showline: true
                 }
             };
@@ -145,15 +146,14 @@ block content
         each val in caloriesBurned
             script.
                 #{totalCalsBurned= totalCalsBurned + val}
-                
+
         script.
             #{avgCalsBurned = totalCalsBurned}
             #{avgCalsBurned = totalCalsBurned / numDays}
             #{avgCalsBurned = Math.round(avgCalsBurned)}
-        
-        h3 Your average calories burned per workout was #{avgCalsBurned} calories
-        h3 You burned #{totalCalsBurned} calories over your last !{num} workouts
 
+        h3 Total Calories Burned: #{totalCalsBurned}
+        h3 Average Calories Burned: #{avgCalsBurned}
 
         div(id="caloriesBurned")
         script.
@@ -166,9 +166,9 @@ block content
             var data = [trace3];
 
             var layout = {
-                title:'Calories Burned in the Past !{num} Workouts',
+                title:'Calories Burned',
                 xaxis: {
-                    title: 'Day',
+                    title: 'Workout',
                     showgrid: true,
                     zeroline: false,
                     showline: true
@@ -180,17 +180,3 @@ block content
             };
 
             Plotly.newPlot('caloriesBurned', data, layout);
-
-
-
-
-    
-
-
-
-
-
-    
-
-
-

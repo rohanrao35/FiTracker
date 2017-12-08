@@ -11,22 +11,22 @@ block content
           .col-md-6.col-md-offset-3
             form(method='post' action='/createAccount')
               div.form-group
-                label(for='firstName') First Name
+                //label(for='firstName') First Name
                 p
                 input.form-control(type='text' id='firstName' placeholder='First Name' name='firstName')
                 p
               div.form-group
-                label(for='lastName') Last Name
+                //label(for='lastName') Last Name
                 p
                 input.form-control(type='text' id='lastName' placeholder='Last Name' name='lastName')
                 p
                 div.form-group
-                label(for='username') User Name
+                //label(for='username') User Name
                 p
-                input.form-control(type='text' id='username' placeholder= 'User Name' name='username')
+                input.form-control(type='text' id='username' placeholder= 'Usename' name='username')
                 p
               div.form-group
-                label(for='gender') Gender
+                //label(for='gender') Gender
                 p
                 | Male
                 input.form-control(type='radio' id='gender' name='gender', value = 0)
@@ -36,19 +36,19 @@ block content
 
                 p
                 div.form-group
-                label(for='age') Age
+                //label(for='age') Age
                 p
-                input.form-control(type='Number' id='age' placeholder='age' name='age')
+                input.form-control(type='Number' id='age' placeholder='Age' name='age')
                 p
               div.form-group
-                label(for='password') Password
+                //label(for='password') Password
                 p
-                input.form-control(type='password' id='password' placeholder='password' name='password')
+                input.form-control(type='password' id='password' placeholder='Password' name='password')
                 p
 
               div.form-group
-                label(for='ReEnterPassword') Password
+                //label(for='ReEnterPassword') Password
                 p
-                input.form-control(type='ReEnterPassword' id='ReEnterPassword' placeholder='Re-Enter Password' name='ReEnterPassword')
+                input.form-control(type='password' id='CPassword' placeholder='Confirm Password' name='Cpassword')
                 p
               button.btn.btn-primary(type='submit') Create Account

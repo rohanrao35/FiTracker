@@ -21,7 +21,7 @@ mongoose.connect('mongodb://rohanrao35:fitracker1@ds129946.mlab.com:29946/fitrac
 
 var db = mongoose.connection;
 // app.listen(3000, 'localhost');
-app.listen(process.env.PORT || 5000)
+app.listen(process.env.PORT || 3000)
 
 
 
@@ -59,9 +59,10 @@ app.post('/login/', function(req, res){
 
   var collection = db.collection('users');
   var user;
-
+  var first;
   collection.find({username: req.body.username}).toArray(function (err, items) { ////////////////
     user = items[0];
+    first = items[0].firstName;
     if(user == null){
       console.log('USER DOES NOT EXIST');
       res.render("index");
@@ -79,7 +80,7 @@ app.post('/login/', function(req, res){
       collection.updateOne({username: req.body.username}, {$set:{loggedIn: 1}});////////////
       //req.session.userID = req.body.username;
       // console.log(req.session);
-      res.render("userInfo", {user: req.body.username});
+      res.render("userInfo", {user: req.body.username, f: first});
       currentUser = req.body.username;////////////////
       //res.render("userInfo");
 
@@ -226,6 +227,12 @@ app.get('/getWorkoutsAll/:username', function(req,res){
 app.post('/createAccount', function(req,res){
     var user = req.body;
     user.loggedIn = 0;
+    if(req.body.password != req.body.CPassword){
+      res.render("signUp");
+    }
+    else if (req.body.password.length < 8) {
+      res.render("signUp");
+    }
 	  User.addUser(user, (err, user) => {
 		    if(err){
 			       throw err;
@@ -252,7 +259,7 @@ app.post('/addWorkout/:username', function(req,res){
   var workout = req.body;
   var currentUser = req.params.username;
 
-
+  var first;
   var collection = db.collection('users');
   //var user;
 
@@ -261,6 +268,7 @@ app.post('/addWorkout/:username', function(req,res){
       // console.log(items[0].username);
       // console.log(items[0].gender);
       // console.log(items[0].age);
+      first = items[0].firstName;
       workout.username = items[0].username;
       workout.gender = items[0].gender;
       workout.age = items[0].age;
@@ -289,7 +297,7 @@ app.post('/addWorkout/:username', function(req,res){
 
       console.log('Workout Added\n')
       console.log(req.body);
-      res.render("userInfo", {user: currentUser});
+      res.render("userInfo", {user: currentUser, f: first});
 
   });
 });

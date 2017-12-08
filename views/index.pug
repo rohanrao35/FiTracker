@@ -6,30 +6,27 @@ block content
   center
 
     script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")
-    
+
     h2 Welcome to FiTracker
       .main.container
         .row
           .col-md-6.col-md-offset-3
-            p.display-4.m-b-2 Log In
+            p.display-4.m-b-2
             form(method='post' action='/login')
               div.form-group
-                label(for='name') User Name
+                //label(for='name')
                 p
-                input.form-control(type='text' id='username' placeholder='User Name' name='username')
+                input.form-control(type='text' id='username' placeholder='Userame' name='username')
                 p
               div.form-group
-                label(for='password') Password
+                //label(for='password')
                 p
-                input.form-control(type='password' id='password' placeholder='password' name='password')
+                input.form-control(type='password' id='password' placeholder='Password' name='password')
                 p
-              button.btn.btn-primary(type='submit') Log in 
+              button.btn.btn-primary(type='submit') Log in
 
-    h2 Dont have a #{title} Account?
-      form(method='get' action='/moveToCreate')  
-        p
-        button.btn.btn-primary(type='submit') Sign Up 
-
-
-
-    
+    h5 Dont have a #{title} Account?
+      .container
+        form(method='get' action='/moveToCreate')
+          p
+          button.btn.btn-primary(type='submit') Sign Up
