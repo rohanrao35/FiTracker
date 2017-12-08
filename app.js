@@ -313,9 +313,15 @@ app.post('/addWorkout/:username', function(req,res){
           }
       });
 
-      console.log('Workout Added\n')
-      console.log(req.body);
-      res.render("userInfo", {user: currentUser, f: first});
+      var currentUser = req.body.username;
+      var collectiona = db.collection('workouts');
+      first = items[0].firstName;
+      collectiona.find({username: currentUser}).sort( { date: -1 } ).toArray(function (err, items1) {
+        res.render("userInfo", {user: currentUser, f: first, num: items1.length});
+        console.log('Current User: '+ currentUser);
+
+      });
+
 
   });
 });
