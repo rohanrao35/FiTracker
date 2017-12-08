@@ -77,8 +77,8 @@ app.post('/login/', function(req, res){
     else{
       console.log('LOGGED IN');
       collection.updateOne({username: req.body.username}, {$set:{loggedIn: 1}});////////////
-      req.session.userID = req.body.username;
-      console.log(req.session);
+      //req.session.userID = req.body.username;
+      // console.log(req.session);
       res.render("userInfo", {user: req.body.username});
       currentUser = req.body.username;////////////////
       //res.render("userInfo");
@@ -243,12 +243,14 @@ app.get('/moveToCreate', function(req,res){
 });
 
 
-app.get('/newWorkout', function(req,res){
-  res.render("addWorkout");
+app.get('/newWorkout/:username', function(req,res){
+  var currentUser = req.params.username;
+  res.render("addWorkout", {user: currentUser});
 });
 
-app.post('/addWorkout', function(req,res){
+app.post('/addWorkout/:username', function(req,res){
   var workout = req.body;
+  var currentUser = req.params.username;
 
 
   var collection = db.collection('users');
@@ -287,7 +289,7 @@ app.post('/addWorkout', function(req,res){
 
       console.log('Workout Added\n')
       console.log(req.body);
-      res.render("userInfo");
+      res.render("userInfo", {user: currentUser});
 
   });
 });

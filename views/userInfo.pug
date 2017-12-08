@@ -5,11 +5,11 @@ block content
   p This is where your FiTracker information will be shown once we have completed the app
 
   h3 Add A New Workout
-      form(method='get' action='/newWorkout')  
+      form(method='get' action='/newWorkout/'+ user)  
         p
         button.btn.btn-primary(type='submit') Add Workout
 
-  h3 View My Workouts From Past 7 Days for !{user}
+  h3 View My Workouts From Past 7 Days
       form(method='get' action='/getWorkouts7/'+ user)  
         p
         button.btn.btn-primary(type='submit') View Workouts
