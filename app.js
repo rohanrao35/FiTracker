@@ -77,23 +77,13 @@ app.post('/login/', function(req, res){
     }
     else{
       console.log('LOGGED IN');
-<<<<<<< Updated upstream
-      collection.updateOne({username: req.body.username}, {$set:{loggedIn: 1}});////////////
-      //req.session.userID = req.body.username;
-      // console.log(req.session);
-      res.render("userInfo", {user: req.body.username, f: first});
-      currentUser = req.body.username;////////////////
-      //res.render("userInfo");
-
-      console.log('Current User: '+ currentUser)
-=======
       collection.updateOne({username: req.body.username}, {$set:{loggedIn: 1}});
 
       var currentUser = req.body.username;
       var collectiona = db.collection('workouts');
       
       collectiona.find({username: currentUser}).sort( { date: -1 } ).toArray(function (err, items1) {
-        res.render("userInfo", {user: req.body.username, num: items1.length});
+        res.render("userInfo", {user: req.body.username, f: first, num: items1.length});
         console.log('Current User: '+ currentUser);
         
       });
@@ -104,7 +94,6 @@ app.post('/login/', function(req, res){
       // currentUser = req.body.username;////////////////
       // //res.render("userInfo");
       // console.log('Current User: '+ currentUser)
->>>>>>> Stashed changes
     }
   });
 });
