@@ -15,7 +15,8 @@
     "morgan": "^1.9.0",
     "pug": "2.0.0-beta11",
     "serve-favicon": "~2.4.5",
-    "session-file-store": "^1.2.0"
+    "session-file-store": "^1.2.0",
+    "mongoose": "4.13.6"
   },
   "devDependencies": {
     "nodemon": "^1.12.5"
